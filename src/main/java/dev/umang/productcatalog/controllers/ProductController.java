@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.umang.productcatalog.dtos.GenericProductDTO;
+import dev.umang.productcatalog.exceptions.NotFoundException;
 import dev.umang.productcatalog.services.ProductService;
 
 @RestController
@@ -46,7 +46,7 @@ public class ProductController {
       }
 
       @GetMapping("{id}")
-      public GenericProductDTO getProductById( @PathVariable("id") Long id){
+      public GenericProductDTO getProductById( @PathVariable("id") Long id) throws NotFoundException{
 
             return productService.getProductById(id);
             //return "Here is get Product by Id "+id;
@@ -65,8 +65,9 @@ public class ProductController {
       }
 
       @PutMapping("{id}")
-      public void updateProductById(@PathVariable("id") Long id, @RequestBody GenericProductDTO genericProductDTO){
-            productService.updateProduct(id, genericProductDTO);
+      public ResponseEntity<GenericProductDTO> updateProductById(@PathVariable("id") Long id, @RequestBody GenericProductDTO genericProductDTO){
+            
+            return new ResponseEntity<GenericProductDTO>(productService.updateProduct(id, genericProductDTO), HttpStatus.OK);
       }
 
       @PatchMapping("{id}")

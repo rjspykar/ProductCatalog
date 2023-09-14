@@ -2,9 +2,11 @@ package dev.umang.productcatalog.dtos;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class FakeStoreProductDTO {
 
       private Long id;
@@ -13,5 +15,8 @@ public class FakeStoreProductDTO {
       private String category;
       private String description;
       private String image;
+
+
+
       
 }

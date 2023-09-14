@@ -21,7 +21,7 @@ public class SelfProductServiceImpl implements ProductService{
       }
 
       @Override
-      public void updateProduct(Long id, GenericProductDTO productDTO) {
+      public GenericProductDTO updateProduct(Long id, GenericProductDTO productDTO) {
             // TODO Auto-generated method stub
             throw new UnsupportedOperationException("Unimplemented method 'updateProduct'");
       }
