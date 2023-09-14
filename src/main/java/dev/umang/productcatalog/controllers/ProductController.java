@@ -1,8 +1,14 @@
 package dev.umang.productcatalog.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -34,7 +40,10 @@ public class ProductController {
       }
 
       @GetMapping
-      public void getAllProducts(){}
+      public List<GenericProductDTO> getAllProducts(){
+
+            return productService.getAllProducts();
+      }
 
       @GetMapping("{id}")
       public GenericProductDTO getProductById( @PathVariable("id") Long id){
@@ -44,7 +53,11 @@ public class ProductController {
       }
 
       @DeleteMapping("{id}")
-      public void deleteProductById(){}
+      public ResponseEntity<GenericProductDTO> deleteProductById(@PathVariable("id") Long id){
+            ResponseEntity<GenericProductDTO> responseEntity = 
+            new ResponseEntity<GenericProductDTO>(productService.deleteProduct(id), HttpStatus.OK);
+            return responseEntity;
+      }
 
       @PostMapping
       public GenericProductDTO createProduct(@RequestBody GenericProductDTO genericProductDTO){
@@ -52,8 +65,14 @@ public class ProductController {
       }
 
       @PutMapping("{id}")
-      public void updateProductById(){}
+      public void updateProductById(@PathVariable("id") Long id, @RequestBody GenericProductDTO genericProductDTO){
+            productService.updateProduct(id, genericProductDTO);
+      }
 
+      @PatchMapping("{id}")
+      public GenericProductDTO updatePatchProductById(@PathVariable("id") Long id, @RequestBody GenericProductDTO genericProductDTO){
+            return productService.updatePatchProduct(id, genericProductDTO);
+      }
        
       
 }
