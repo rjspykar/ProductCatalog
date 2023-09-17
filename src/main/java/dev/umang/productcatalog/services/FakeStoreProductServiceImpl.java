@@ -3,7 +3,6 @@ package dev.umang.productcatalog.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import dev.umang.productcatalog.clients.productservice.fakestore.FakeStoreProductServiceClient;
 import dev.umang.productcatalog.dtos.FakeStoreProductDTO;

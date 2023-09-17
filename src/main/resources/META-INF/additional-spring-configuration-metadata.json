@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "productservice.type",
+  "type": "java.lang.String",
+  "description": "Default Implementation class for ProductService Interface"
+}]}
