@@ -2,18 +2,18 @@ package dev.umang.productcatalog.clients.productservice;
 
 import java.util.List;
 
-import dev.umang.productcatalog.dtos.GenericProductDTO;
+import dev.umang.productcatalog.dtos.FakeStoreProductDTO;
 import dev.umang.productcatalog.exceptions.NotFoundException;
 
 public interface ThirdPartyProductService {
 
-      GenericProductDTO getProductById(Long id) throws NotFoundException;
+      FakeStoreProductDTO getProductById(Long id) throws NotFoundException;
 
-      GenericProductDTO createProduct(GenericProductDTO productDTO);
+      FakeStoreProductDTO createProduct(FakeStoreProductDTO productDTO);
 
-      GenericProductDTO deleteProduct(Long id);
+      FakeStoreProductDTO deleteProduct(Long id);
 
-      GenericProductDTO updateProduct(Long id, GenericProductDTO productDTO);
+      FakeStoreProductDTO updateProduct(Long id, FakeStoreProductDTO productDTO);
 
-      List<GenericProductDTO> getAllProducts();
+      List<FakeStoreProductDTO> getAllProducts();
 }

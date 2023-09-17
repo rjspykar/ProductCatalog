@@ -1,9 +1,12 @@
 package dev.umang.productcatalog.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import dev.umang.productcatalog.clients.productservice.fakestore.FakeStoreProductServiceClient;
+import dev.umang.productcatalog.dtos.FakeStoreProductDTO;
 import dev.umang.productcatalog.dtos.GenericProductDTO;
 import dev.umang.productcatalog.exceptions.NotFoundException;
 
@@ -16,24 +19,49 @@ public class FakeStoreProductServiceImpl implements ProductService {
             this.fakeStoreProductServiceClient = fakeStoreProductServiceClient;
       }
 
+      private GenericProductDTO convertFakeStoreProductToGenericProduct(FakeStoreProductDTO fakeStoreProductDTO) {
+            GenericProductDTO product = new GenericProductDTO();
+            product.setId(fakeStoreProductDTO.getId());
+            product.setImage(fakeStoreProductDTO.getImage());
+            product.setTitle(fakeStoreProductDTO.getTitle());
+            product.setDescription(fakeStoreProductDTO.getDescription());
+            product.setCategory(fakeStoreProductDTO.getCategory());
+            product.setPrice(fakeStoreProductDTO.getPrice());
+            return product;
+      }
+
+      private FakeStoreProductDTO convertGenericProductToFakeStoreProduct(GenericProductDTO genericProductDTO) {
+            FakeStoreProductDTO fakeStoreProductDTO = new FakeStoreProductDTO();
+            fakeStoreProductDTO.setId(genericProductDTO.getId());
+            fakeStoreProductDTO.setImage(genericProductDTO.getImage());
+            fakeStoreProductDTO.setTitle(genericProductDTO.getTitle());
+            fakeStoreProductDTO.setDescription(genericProductDTO.getDescription());
+            fakeStoreProductDTO.setCategory(genericProductDTO.getCategory());
+            fakeStoreProductDTO.setPrice(genericProductDTO.getPrice());
+            return fakeStoreProductDTO;
+        }
+        
+      
       @Override
       public GenericProductDTO getProductById(Long id) throws NotFoundException {
-            return fakeStoreProductServiceClient.getProductById(id);
+
+
+            return  convertFakeStoreProductToGenericProduct(fakeStoreProductServiceClient.getProductById(id));
       }
 
       @Override
       public GenericProductDTO createProduct(GenericProductDTO productDTO) {
-            return fakeStoreProductServiceClient.createProduct(productDTO);
+            return convertFakeStoreProductToGenericProduct(fakeStoreProductServiceClient.createProduct(convertGenericProductToFakeStoreProduct(productDTO)));
       }
 
       @Override
       public GenericProductDTO deleteProduct(Long id) {
-            return fakeStoreProductServiceClient.deleteProduct(id);
+            return convertFakeStoreProductToGenericProduct(fakeStoreProductServiceClient.deleteProduct(id));
       }
 
       @Override
       public GenericProductDTO updateProduct(Long id, GenericProductDTO productDTO) {
-            return fakeStoreProductServiceClient.updateProduct(id, productDTO);
+            return convertFakeStoreProductToGenericProduct(fakeStoreProductServiceClient.updateProduct(id, convertGenericProductToFakeStoreProduct(productDTO)));
       }
 
       @Override
@@ -44,7 +72,11 @@ public class FakeStoreProductServiceImpl implements ProductService {
 
       @Override
       public List<GenericProductDTO> getAllProducts() {
-            return fakeStoreProductServiceClient.getAllProducts();
+
+            List<FakeStoreProductDTO> res =  fakeStoreProductServiceClient.getAllProducts();
+            List<GenericProductDTO> ans =new ArrayList<>(); 
+            res.forEach( e->{ans.add(convertFakeStoreProductToGenericProduct(e));} );
+            return ans;
       }
 
       
