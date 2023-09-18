@@ -13,7 +13,6 @@ import org.springframework.web.client.RestTemplate;
 
 import dev.umang.productcatalog.clients.productservice.ThirdPartyProductService;
 import dev.umang.productcatalog.dtos.FakeStoreProductDTO;
-import dev.umang.productcatalog.dtos.FakeStoreProductDTO;
 import dev.umang.productcatalog.exceptions.NotFoundException;
 
 

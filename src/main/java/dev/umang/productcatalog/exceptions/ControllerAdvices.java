@@ -17,6 +17,5 @@ public class ControllerAdvices {
             return new ResponseEntity<ExceptionDTO>(
                   new ExceptionDTO(HttpStatus.NOT_FOUND, notFoundException.getMessage()), 
                   HttpStatus.NOT_FOUND);
-            
       }
 }
