@@ -77,12 +77,12 @@ public class ProductController {
             return productService.updatePatchProduct(id, genericProductDTO);
       }
 
-      @ExceptionHandler(NotFoundException.class)
-      private ResponseEntity<ExceptionDTO> handleNotFoundException(NotFoundException notFoundException){
-            return new ResponseEntity<ExceptionDTO>(
-                  new ExceptionDTO(HttpStatus.NOT_FOUND, notFoundException.getMessage()), 
-                  HttpStatus.NOT_FOUND);
-      }
+      // @ExceptionHandler(NotFoundException.class)
+      // private ResponseEntity<ExceptionDTO> handleNotFoundException(NotFoundException notFoundException){
+      //       return new ResponseEntity<ExceptionDTO>(
+      //             new ExceptionDTO(HttpStatus.NOT_FOUND, notFoundException.getMessage()), 
+      //             HttpStatus.NOT_FOUND);
+      // }
        
       
 }

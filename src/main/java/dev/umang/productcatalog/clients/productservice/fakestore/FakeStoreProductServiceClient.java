@@ -3,6 +3,7 @@ package dev.umang.productcatalog.clients.productservice.fakestore;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -24,14 +25,27 @@ import dev.umang.productcatalog.exceptions.NotFoundException;
 public class FakeStoreProductServiceClient implements ThirdPartyProductService {
 
       private RestTemplateBuilder restTemplateBuilder;
-      private final String specificProductRequestURL = "https://fakestoreapi.com/products/{id}";
 
-      private final String getAllProductsURL = "https://fakestoreapi.com/products";
+      @Value("${fakestore_api_url}")
+      private String fakestore_api_url;
 
-      private String createProductRequestURL = "https://fakestoreapi.com/products";
+      @Value("${fakestore_api_url_path}")
+      private String fakestore_api_url_path;
 
-      public FakeStoreProductServiceClient(RestTemplateBuilder restTemplateBuilder) {
+      private String specificProductRequestURL;
+
+      private String getAllProductsURL;
+
+      private String createProductRequestURL;
+
+      public FakeStoreProductServiceClient(RestTemplateBuilder restTemplateBuilder,
+       @Value("${fakestore_api_url}") String fakestore_api_url,
+       @Value("${fakestore_api_url_path}") String fakestore_api_url_path
+      ) {
             this.restTemplateBuilder = restTemplateBuilder;
+            specificProductRequestURL = fakestore_api_url + fakestore_api_url_path + "/{id}";
+            getAllProductsURL = fakestore_api_url+fakestore_api_url_path;
+            createProductRequestURL = getAllProductsURL;
       }
 
       public FakeStoreProductDTO createProduct(FakeStoreProductDTO productDTO) {
