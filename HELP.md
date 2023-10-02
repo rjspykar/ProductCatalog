@@ -21,6 +21,5 @@ The following guides illustrate how to use some features concretely:
 ### HW 
 #### Lecture | BE: Advanced Database Operations and DB Migrations
 
-![](/Users/hustle/Desktop/Screenshot 2023-10-03 at 12.23.42 AM.png)
-
+![Screenshot 2023-10-03 at 12.23.42 AM.png](src%2Fmain%2Fresources%2Fimages%2FScreenshot%202023-10-03%20at%2012.23.42%E2%80%AFAM.png)
 
